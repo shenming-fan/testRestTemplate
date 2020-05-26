@@ -2,13 +2,17 @@ package com.resttemplate.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
+import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
+import org.springframework.util.ObjectUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Configuration
 public class RestTemplateConfig {
@@ -23,11 +27,11 @@ public class RestTemplateConfig {
 
     @Bean
     public RestTemplate restTemplate(ClientHttpRequestFactory factory){
-        RestTemplate restTemplate = new RestTemplate();
-        restTemplate.setRequestFactory(factory);
-        restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
-        return restTemplate;
+
+        return new RestTemplate(factory);
     }
+
+
 
     @Bean
     public ClientHttpRequestFactory simpleClientHttpRequestFactory(){
