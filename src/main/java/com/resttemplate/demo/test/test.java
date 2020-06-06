@@ -9,13 +9,20 @@ import org.springframework.web.client.RestTemplate;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class test {
     public static void main(String[] args)  {
-        RestTemplate restTemplate = new RestTemplate();
-
-        String  quote = restTemplate.getForObject("http://gturnquist-quoters.cfapps.io/api/random",String.class);
-        System.out.println(quote);
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                System.out.println("task run "+new Date());
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask,10,3000);
 
     }
 }
